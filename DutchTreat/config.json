@@ -1,0 +1,14 @@
+{
+  "Colors": {
+    "Favorites": "blue"
+  },
+  "ConnectionStrings": {
+    "DutchConnectionString": "server=temp-vm4\\DEV2K17;Database=DutchTreatDb;Integrated Security=true;MultipleActiveResultSets=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning"
+    }
+  }
+}
