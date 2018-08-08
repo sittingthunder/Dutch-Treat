@@ -25,7 +25,6 @@ namespace DutchTreat.Data
 
         public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
-
             if (includeItems)
             {
 
@@ -41,6 +40,25 @@ namespace DutchTreat.Data
             }
         }
 
+        public IEnumerable<Order> GetAllOrdersByUser(string userName, bool includeItems)
+        {
+            if (includeItems)
+            {
+
+                return _ctx.Orders
+                    .Where(o=> o.User.UserName == userName)
+                    .Include(o => o.Items)
+                    .ThenInclude(i => i.Product)
+                    .ToList();
+            }
+            else
+            {
+                return _ctx.Orders
+                    .Where(o => o.User.UserName == userName)
+                    .ToList();
+            }
+        }
+
         public IEnumerable<Product> GetAllProducts()
         {
             return _ctx.Products
@@ -48,12 +66,12 @@ namespace DutchTreat.Data
                 .ToList();
         }
 
-        public Order GetOrderById(int id)
+        public Order GetOrderById(string userName, int id)
         {
             return _ctx.Orders
                 .Include(o => o.Items)
                 .ThenInclude(i => i.Product)
-                .Where(o => o.Id == id)
+                .Where(o => o.Id == id && o.User.UserName == userName)
                 .FirstOrDefault();
         }
 
